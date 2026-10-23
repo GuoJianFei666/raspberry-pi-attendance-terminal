@@ -1,0 +1,27 @@
+{
+  "checked_at_utc": "2026-10-21T10:14:47.546527+00:00",
+  "method": "Python standard-library read-only data inspection; not model or application evaluation",
+  "wider_face": {
+    "train": {
+      "images": 12880,
+      "annotated_face_rows": 159420,
+      "positive_size_boxes": 159393,
+      "invalid_flag_counts": {
+        "0": 157021,
+        "1": 2399
+      },
+      "zero_count_placeholder_lines": 4
+    },
+    "val": {
+      "images": 3226,
+      "annotated_face_rows": 39708,
+      "positive_size_boxes": 39697,
+      "invalid_flag_counts": {
+        "0": 39123,
+        "1": 585
+      },
+      "zero_count_placeholder_lines": 0
+    },
+    "scope": "Text bounding-box annotations only; no image or identity validation, no detector results"
+  }
+}

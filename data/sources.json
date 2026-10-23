@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "project": "attendance-terminal",
+  "checked_date": "2026-10-21",
+  "sources": [
+    {
+      "id": "wider-face",
+      "title": "WIDER FACE university dataset card",
+      "url": "https://huggingface.co/datasets/CUHK-CSE/wider_face/blob/833d07e7bf3860f294242312fe95eed0561eeb17/README.md",
+      "revision": "833d07e7bf3860f294242312fe95eed0561eeb17",
+      "license_note": "CC BY-NC-ND 4.0；本仓库不分发图像或标注原文",
+      "used_for": "人脸框与困难属性；不是身份和考勤标签",
+      "projects": [
+        "attendance-terminal"
+      ],
+      "checked_date": "2026-10-21"
+    }
+  ]
+}

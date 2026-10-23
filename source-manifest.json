@@ -1,0 +1,27 @@
+{
+  "snapshot_date": "2026-10-23",
+  "files": [
+    {
+      "path": "src/pi5/camera_display.py",
+      "bytes": 3378,
+      "sha256": "c9a005305db57eea64d60f504a265bfc38b776298bf194c2b93f8ad39a5c430c",
+      "origin": "existing Pi5-source snapshot",
+      "modified": false
+    },
+    {
+      "path": "src/pi5/face_detect.py",
+      "bytes": 23266,
+      "sha256": "9bf997e313daa523a9e3ea88b5aed2d7237a7db64209ac9bcebecd8f7b756518",
+      "origin": "existing Pi5-source snapshot",
+      "modified": false
+    },
+    {
+      "path": "src/pi5/play_buzzer.py",
+      "bytes": 1010,
+      "sha256": "297a6b4a68a2ff44cf175a6148e41b6c995d144cd8c90b54b24defb8d4dffac2",
+      "origin": "existing Pi5-source snapshot",
+      "modified": false
+    }
+  ],
+  "execution": "none; copied bytes only"
+}
