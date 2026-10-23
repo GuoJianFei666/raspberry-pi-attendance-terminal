@@ -1,17 +1,35 @@
-# 已有脚本使用说明
+# 使用说明
 
-运行环境为连接兼容CSI摄像头和显示设备的树莓派。相机脚本使用Picamera2、libcamera、OpenCV和NumPy；人脸分支另依赖ncnn；蜂鸣器脚本使用gpiozero并连接BCM17无源蜂鸣器。本次发布未安装环境、接入设备或运行源码。
+## 名单确认与记录
 
-## 相机预览
+需要Python 3.10及以上。仓库根目录运行 `python -m attendance` 后，打开 `http://127.0.0.1:8765`。基础服务仅使用Python标准库，不需要摄像头或模型。
 
-在已有相机环境中，`python3 src/pi5/camera_display.py`启动预览。按`p`拍照、`r`开始/停止录像、`q`退出，输出写入运行位置下的photos/movies。脚本包含设备初始化，阅读源码不会触发设备操作，执行时会访问摄像头。
+导入UTF-8 CSV，第一行为 `student_id,name`。使用 [roster.example.csv](../examples/roster.example.csv) 时，记录仅用于功能检查。填写课程、班级、确认教师和时间后创建草稿，逐项选择到课、缺勤、迟到或请假，确认保存。名单漏项会阻止保存，已确认课程不能覆盖。查询框支持课程或班级关键字，记录可导出CSV。
 
-## NCNN人脸分支
+数据库默认写入 `var/attendance.sqlite3`，可用 `--db` 指定本机位置。更换端口使用 `--port 8766`。服务只监听127.0.0.1，不提供多用户远程访问。退出使用Ctrl+C。
 
-先阅读`face_detect.py`末尾的参数定义。默认模型位于脚本同级`downloaded_model/`，文件名为`scrfd_500m_bnkps_shape640x640.opt.param`和同名`.bin`；权重不在公开包内。可使用相机模式或本地图片模式；`p/i/r/t/q`交互和具体参数以该快照代码为准。
+## 人体模型与摄像头
 
-## 外设脚本
+视觉模块另需Ultralytics、OpenCV、NCNN及其依赖。可在独立Python环境安装 `python -m pip install -e ".[vision]"`。Picamera2与libcamera应使用Raspberry Pi OS的相机环境；安装方法以[Raspberry Pi Picamera2文档](https://github.com/raspberrypi/picamera2)为准。当前开发环境未安装这些视觉依赖。
 
-`play_buzzer.py`是独立音符播放示例，GPIO引脚和接线需按已有硬件确认；它不作为考勤状态控制器入口。
+人体模型由使用者放在本地。NCNN目录须包含 `model.ncnn.param`、`model.ncnn.bin` 与 `metadata.yaml`；类别名称必须能识别所选人体类别。原有人脸权重、SCRFD权重，以及80个数字占位类别的早期导出目录均不适合作为本应用人体模型。导出与加载方式参照[Ultralytics NCNN文档](https://docs.ultralytics.com/integrations/ncnn/)。本应用不执行模型导出或量化。
 
-完整课堂人体计数、名单确认界面与记录查询功能以项目说明为范围，当前公开包只包含表中三份已有脚本，不提供完整课堂应用的一键启动命令。
+```console
+python -m attendance --config config.example.json --model /path/to/yolo11n_ncnn_model --source picamera2
+```
+
+本地`.pt`人体模型同样可作为 `--model` 参数；USB设备使用 `--source opencv:0`。Picamera2选择 `RGB888` 输出，其数组字节顺序为BGR，可直接交给OpenCV和Ultralytics，依据[Picamera2手册](https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf)附录A。
+
+## 座位区域与人数窗口
+
+[config.example.json](../config.example.json) 中 `roi` 为0到1之间的画面坐标，原点位于左上角。按边界顺序填写凸多边形，覆盖学生座位并避开讲台。人体框底边中心落在区域内才计数。检测坐标随画面宽高归一化，改变分辨率时保留相同区域定义。
+
+`confidence` 控制最低检测置信度，`class_ids` 指定人体类别；`window_size` 控制最近多少帧参与人数中位数计算，偶数帧时取较低中位数。`poll_interval` 为推理后等待时长，实际更新间隔还包括采集与推理耗时。`max_age` 为观察值有效时长，部署时需按实际更新间隔调整。示例参数用于启动配置，不表示经过课堂效果优化。
+
+## 原有Pi5脚本
+
+- `python3 src/pi5/camera_display.py`：按 `p` 拍照、`r` 开始或停止录像、`q` 退出。照片和录像写入运行目录下的 `photos`、`movies` 目录。
+- `face_detect.py`：相机与本地图片模式共用SCRFD / NCNN模型，默认权重位于脚本同级 `downloaded_model/`，名为 `scrfd_500m_bnkps_shape640x640.opt.param` 与同名 `.bin`。本地图片可用 `python3 src/pi5/face_detect.py --image /path/to/image.jpg --no-show`，其余参数见源码末尾。
+- `play_buzzer.py`：使用gpiozero与BCM17无源蜂鸣器，独立播放音符。该脚本未接入新增名单确认服务。
+
+这些脚本依赖对应原有环境，本次整理保留字节且未运行。相机与人体模型的本版本验证范围见[版本记录](CHANGELOG.md)。

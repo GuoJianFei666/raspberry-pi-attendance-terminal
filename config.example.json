@@ -1,0 +1,11 @@
+{
+  "roi": [[0.05, 0.2], [0.95, 0.2], [0.95, 0.98], [0.05, 0.98]],
+  "class_ids": [0],
+  "confidence": 0.45,
+  "window_size": 5,
+  "max_age": 3.0,
+  "poll_interval": 0.5,
+  "width": 1280,
+  "height": 720,
+  "image_size": 640
+}

@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "classroom-attendance-terminal"
+version = "0.1.0"
+description = "Local classroom head counts and teacher-confirmed attendance records"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = []
+
+[project.optional-dependencies]
+vision = ["ultralytics>=8.4.51,<9", "opencv-python>=4.8,<5", "ncnn"]
+
+[project.scripts]
+classroom-attendance = "attendance.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["attendance*"]
+
+[tool.setuptools.package-data]
+attendance = ["web/*.html", "web/*.css", "web/*.js"]

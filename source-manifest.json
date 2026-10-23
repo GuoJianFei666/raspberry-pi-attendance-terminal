@@ -23,5 +23,68 @@
       "modified": false
     }
   ],
-  "execution": "none; copied bytes only"
+  "execution": "original Pi5 snapshots not executed; new attendance business and HTTP tests executed separately",
+  "application_added": "2026-10-23",
+  "application_files": [
+    {
+      "path": "attendance/__init__.py",
+      "bytes": 93,
+      "sha256": "5d9fefd7a06315b20146dd386ef8a9a7d0fd76c166f06907cc482ba864429af1",
+      "origin": "2026-10-23 new classroom application"
+    },
+    {
+      "path": "attendance/__main__.py",
+      "bytes": 3491,
+      "sha256": "a58f6fbd5156bb9b4951a8c980ef73a73b5705782f1b9a9e413ac7699f59029e",
+      "origin": "2026-10-23 new classroom application"
+    },
+    {
+      "path": "attendance/counting.py",
+      "bytes": 4173,
+      "sha256": "75399523bbf61f60c2b8e50c17f11d1245416770dc183a351c2ec9f8b235d9f7",
+      "origin": "2026-10-23 new classroom application"
+    },
+    {
+      "path": "attendance/server.py",
+      "bytes": 5765,
+      "sha256": "b38cae88a1cb9e079086534b8af79d36f6d28f3dd637add7f157b46ebd083e3e",
+      "origin": "2026-10-23 new classroom application"
+    },
+    {
+      "path": "attendance/storage.py",
+      "bytes": 7970,
+      "sha256": "70b8957e4860ad5565f55836baa8acad5f1f6a23b2d575535dcfbde8ec91acd9",
+      "origin": "2026-10-23 new classroom application"
+    },
+    {
+      "path": "attendance/vision.py",
+      "bytes": 7667,
+      "sha256": "b473947849e72d2c0c639b39d8a811876ef8404cf7803e76a85fde43601aa555",
+      "origin": "2026-10-23 new classroom application"
+    },
+    {
+      "path": "attendance/web/app.js",
+      "bytes": 6751,
+      "sha256": "199499dea1ab67a961713b6b7fe51e59730c7c95cd3e2864a885c7406d39f456",
+      "origin": "2026-10-23 new classroom application"
+    },
+    {
+      "path": "attendance/web/index.html",
+      "bytes": 3275,
+      "sha256": "8bba7870c3bf2971042da7183c1c3b14e763fee29ff52eec773ebd2579bc9f15",
+      "origin": "2026-10-23 new classroom application"
+    },
+    {
+      "path": "attendance/web/style.css",
+      "bytes": 3471,
+      "sha256": "1b2bd5f871431e1469f4f9cd9b805cc415187f45e4c062f561fb0f043e6ef7d3",
+      "origin": "2026-10-23 new classroom application"
+    },
+    {
+      "path": "tests/test_attendance.py",
+      "bytes": 11412,
+      "sha256": "0647b8a203f4f615c9e69bbc3662cbc4aa4dac36d7c0421fc48895942c43ec6c",
+      "origin": "2026-10-23 new classroom application"
+    }
+  ]
 }

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>课堂考勤终端</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
+</head>
+<body>
+<header><div><span class="eyebrow">CLASSROOM / ATTENDANCE</span><h1>课堂考勤终端</h1></div><span class="tag">本地记录 · 教师确认</span></header>
+<main>
+  <section class="live panel" aria-labelledby="live-title">
+    <div><h2 id="live-title">座位区域可见人数</h2><strong id="count">—</strong><p id="live-state" role="status">正在读取设备状态</p><small id="capture-time">人数仅辅助核对，个人状态由教师确认。</small></div>
+    <div class="preview"><img id="preview" alt="当前学生座位区域检测画面" hidden><p id="preview-note">启用摄像头后显示检测画面。<br>画面仅在内存中保留。</p></div>
+  </section>
+  <p id="message" role="status" aria-live="polite" hidden></p>
+  <div class="workspace">
+    <section class="panel" aria-labelledby="new-title"><h2 id="new-title">新建课程记录</h2>
+      <form id="create-form">
+        <label>课程名称<input name="title" required maxlength="200" placeholder="例如：人工智能基础"></label>
+        <div class="pair"><label>班级<input name="class_name" required maxlength="200"></label><label>确认教师<input name="teacher" required maxlength="200"></label></div>
+        <label>上课时间<input type="datetime-local" name="scheduled_at" required></label>
+        <label>导入班级名单 CSV<input id="roster-file" type="file" accept=".csv,text/csv" required></label>
+        <p class="hint">表头为 student_id,name。每行一位学生，学号不可重复。示例名单仅供功能检查。</p>
+        <button type="submit">创建待确认记录</button>
+      </form>
+      <hr><div class="section-title"><h2>记录查询</h2><button class="secondary" id="refresh" type="button">刷新</button></div>
+      <label class="search">课程或班级<input id="search" type="search" placeholder="输入关键字后按回车"></label>
+      <ul id="sessions" class="sessions"></ul>
+    </section>
+    <section class="panel review" aria-labelledby="review-title">
+      <div class="section-title"><h2 id="review-title">名单确认</h2><a id="export" hidden>导出 CSV</a></div>
+      <div id="empty" class="empty">选择左侧课程记录，逐一确认学生状态。</div>
+      <div id="detail" hidden><p id="session-info"></p><p id="record-count" class="hint"></p>
+        <div class="table-wrap"><table><thead><tr><th>学号</th><th>姓名</th><th>考勤状态</th></tr></thead><tbody id="records"></tbody></table></div>
+        <label>备注<textarea id="note" rows="3" maxlength="1000" placeholder="可记录遮挡、离席或人工核对情况"></textarea></label>
+        <button id="confirm" type="button">确认并保存本节课考勤</button>
+        <p class="hint">确认后保留当前名单与人数观察值，记录不可覆盖。尚未填写的状态会阻止保存。</p>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>视觉人数与名单考勤分别记录。摄像头不可用时，仍可完成名单人工确认。</footer>
+</body></html>
